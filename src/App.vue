@@ -1,16 +1,23 @@
-<script setup lang="ts">
-import {ref, computed} from "vue";
+<script lang="ts" setup>
+import {computed, ref} from "vue";
+import MyAddButton from "./components/MyAddButton.vue";
+import MyButtonForShow from "./components/MyButtonForShow.vue";
+import MyTodoList from "./components/MyTodoList.vue";
 
 let id = 1
+let time = new Date().getDay()
 const newTodo = ref('')
-const todos = ref([{id: id++, todo: 'Первое задание', done: true}])
+const todos = ref([{id: id++, addTime: time, todo: 'Первое задание', done: true}])
 const hideCompleted = ref(false)
 const addTodo = () => {
-  todos.value.push({id: id++, todo: newTodo.value, done: false})
+  todos.value.push({id: id++, addTime: time, todo: newTodo.value, done: false})
   newTodo.value = ''
 }
 const removeTodo = (id) => {
   todos.value = todos.value.filter(t => t.id !== id)
+}
+const switchView = () => {
+  hideCompleted.value = !hideCompleted.value
 }
 const filteredTodos = computed(() => {
   return hideCompleted.value
@@ -21,18 +28,20 @@ const filteredTodos = computed(() => {
 
 <template>
   <h1>todo list:</h1>
-  <input type="text" v-model='newTodo'>
-  <button class="addButton" @click='addTodo'>add in todo list</button>
-  <ul>
-    <template v-for='todo in filteredTodos'>
-      <li>
-        <button class="deleteButton" @click='removeTodo(todo.id)'>x</button>
-        <span :class="{ done: todo.done }">{{ todo.todo }}</span>
-        <input type="checkbox" v-model="todo.done">
-      </li>
-    </template>
-  </ul>
-  <button @click='hideCompleted = !hideCompleted'>{{ !hideCompleted ? 'Hide completed' : 'Show all' }}</button>
+  <input
+    v-model="newTodo"
+    type="text"
+  >
+  <MyAddButton @click="addTodo" />
+
+  <MyTodoList
+    :filtered-todos="filteredTodos"
+    @click="removeTodo"
+  />
+  <MyButtonForShow
+    :hide-completed="hideCompleted"
+    @click="switchView"
+  />
 </template>
 
 <style scoped>
@@ -43,31 +52,5 @@ input {
   font-family: inherit;
 }
 
-ul {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
 
-li {
-  font-size: 1.3em;
-  list-style: none;
-  margin-right: 10px;
-}
-
-.addButton {
-  margin-left: 10px;
-}
-
-.deleteButton {
-  display: inline;
-  font-size: 1em;
-  line-height: 10px;
-  width: min-content;
-  height: min-content;
-}
-
-.done {
-  text-decoration: line-through;
-}
 </style>
