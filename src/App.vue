@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import MyAddButton from "./components/MyAddButton.vue";
 import MyButtonForShow from "./components/MyButtonForShow.vue";
-import MyImport from "./components/MyImport.vue";
+import MyImport from "./components/MyInput.vue";
 import MyTodoList from "./components/MyTodoList.vue";
 import {computed, ref} from "vue";
 
