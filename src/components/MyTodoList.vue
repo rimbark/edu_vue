@@ -6,9 +6,10 @@ defineEmits(['click'])
 
 const changeDateFormat = (date) => {
   const dayNames = [
-    'пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'
+    'вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'
   ]
-  return dayNames[date - 1]
+  console.log(date)
+  return dayNames[date]
 }
 </script>
 

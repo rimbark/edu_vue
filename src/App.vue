@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import {computed, ref} from "vue";
 import MyAddButton from "./components/MyAddButton.vue";
 import MyButtonForShow from "./components/MyButtonForShow.vue";
+import MyImport from "./components/MyImport.vue";
 import MyTodoList from "./components/MyTodoList.vue";
+import {computed, ref} from "vue";
 
 let id = 1
 let time = new Date().getDay()
@@ -28,10 +29,7 @@ const filteredTodos = computed(() => {
 
 <template>
   <h1>todo list:</h1>
-  <input
-    v-model="newTodo"
-    type="text"
-  >
+  <MyImport v-model="newTodo" />
   <MyAddButton @click="addTodo" />
 
   <MyTodoList

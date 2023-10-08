@@ -10,25 +10,45 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest'
   },
+  'plugins': [
+    'sort-imports-es6-autofix'
+  ],
   rules: {
     'vue/attributes-order': ['error'],
-    'vue/max-attributes-per-line': ['error', {
-      'singleline': {
-        'max': 1
-      }
-    }],
-    "vue/first-attribute-linebreak": ["error", {
-      "singleline": "ignore",
-      "multiline": "below"
-    }],
-    "vue/order-in-components": ["error"],
-    "vue/block-lang": ["error",
+    'vue/max-attributes-per-line': [
+      'error', {
+        'singleline': {
+          'max': 1
+        }
+      }],
+    'vue/first-attribute-linebreak': [
+      'error', {
+        'singleline': 'ignore',
+        'multiline': 'below'
+      }],
+    'vue/order-in-components': ['error'],
+    'vue/block-lang': [
+      'error',
       {
-        "script": {
-          "lang": "ts"
+        'script': {
+          'lang': 'ts'
         }
       }
     ],
-    "sort-imports": ["error"]
+    'sort-imports': [
+      'error', {
+        'ignoreCase': true,
+        'ignoreDeclarationSort': false,
+        'ignoreMemberSort': false,
+        'memberSyntaxSortOrder': ['all', 'single', 'multiple', 'none'],
+        'allowSeparatedGroups': false
+      }],
+    'sort-imports-es6-autofix/sort-imports-es6': [
+      2, {
+        'ignoreCase': false,
+        'ignoreMemberSort': false,
+        'memberSyntaxSortOrder': ['all', 'single', 'multiple', 'none']
+      }]
   }
+
 }
